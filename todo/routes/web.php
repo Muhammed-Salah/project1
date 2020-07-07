@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,14 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', "TodoController@home")->name('home');
+
+Route::post('/create', "TodoController@store")->name('store');
 
 Route::get('/about-us', function(){
     return "<h1>About-us</h1>";
 });
 
-Route::get('/contact-us', function(){
-    return view('contact-us',[ 'title'=>"Contact-us"]);
-});
+Route::get('/contact-us', );
