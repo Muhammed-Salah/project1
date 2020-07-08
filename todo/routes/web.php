@@ -18,8 +18,9 @@ Route::get('/', "TodoController@home")->name('home');
 
 Route::post('/create', "TodoController@store")->name('store');
 
-Route::get('/about-us', function(){
-    return "<h1>About-us</h1>";
-});
+Route::get('/update/{todoid}', "Todocontroller@update")->name('update');
 
-Route::get('/contact-us', );
+Route::post('/edit/{id}', "Todocontroller@edit")->name('edit');
+
+Route::post('/delete/{todoid}', "Todocontroller@delete")->name('delete');
+

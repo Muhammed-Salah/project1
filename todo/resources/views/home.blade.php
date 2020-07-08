@@ -15,10 +15,10 @@ Home
                 <form method="POST" action="{{route('store')}}">
                     @csrf
                     <label for="title">Title*</label>
-                    <input type="text" name="title" id="title" class="form-control mb-2"/>
-                    @error('titleerror')
-                        <small class="text-danger">{{ $message }}</small>
-                    @enderror
+                    <input type="text" name="title" value="{{old('title')}}" id="title" class="form-control mb-2"/>
+                    @foreach($errors->get('title') as $err )  <!-- used for printing multiple errors -->
+                        <small class="text-danger">{{ $err }}</small>
+                    @endforeach
                         <input type="submit" class="btn btn-dark btn-block" value="Submit"/>
                 </form>
             </div>
@@ -27,11 +27,12 @@ Home
                     @foreach($todos as $todoo)
                         <div class="todo-content border border-dark p-2 mb-2 d-flex justify-content-between">
                             <div>
-                                <span class="lead">{{$todoo->title}}</span>
+                                <span class="lead">{{ $todoo->title }}</span>
                             </div>
                             <div>
-                                <a href="#" class="btn btn-warning">Update</a>
-                                <form action="#" method="POST" class="d-inline-block">
+                                <a href="{{route('update',$todoo->id)}}" class="btn btn-warning">Update</a>
+                                <form action="{{route('delete',$todoo->id)}}" method="POST" class="d-inline-block">
+                                    @csrf
                                     <input type="submit" class="btn btn-danger" value="Delete"/>
                                 </form>
                             </div>
